@@ -1,0 +1,51 @@
+const themeColors = {
+  etemad: {
+    pageBg: "bg-slate-200",
+    pageText: "text-slate-900",
+    inputBg: "bg-slate-50",
+    buttonBg: "bg-slate-700",
+    hoverButton: "hover:bg-slate-800",
+    buttonText: "text-slate-200",
+    deviderText: "text-slate-700",
+    deviderBorder: "border-slate-400",
+    titleBorder: "border-slate-500",
+    mainBorder: "border-slate-300",
+    toolbarBg: "bg-stone-800",
+    toolbarText: "text-stone-200",
+    loadingBg: "bg-slate-800",
+    navbarBg: "bg-slate-50",
+    navbarActive: "text-slate-950 scale-150",
+    navbarItem: "text-slate-800",
+    loadingColor: "text-slate-600",
+    taskNavBg: "bg-slate-300",
+    taskNavText: "text-slate-600",
+    taskNavhoverText: "hover:text-slate-900",
+  },
+  yashmi: {
+    pageBg: "bg-teal-700",
+    pageText: "text-teal-100",
+    inputBg: "bg-teal-800",
+    buttonBg: "bg-teal-50",
+    hoverButton: "hover:bg-teal-100",
+    buttonText: "text-teal-700",
+    deviderText: "text-teal-200",
+    deviderBorder: "border-teal-300",
+    titleBorder: "border-teal-50",
+    mainBorder: "border-teal-600",
+    toolbarBg: "bg-stone-800",
+    toolbarText: "text-stone-200",
+    loadingBg: "bg-teal-800",
+    navbarBg: "bg-teal-50",
+    navbarActive: "text-teal-950 scale-150",
+    navbarItem: "text-teal-800",
+    loadingColor: "text-teal-400",
+    taskNavBg: "bg-teal-200",
+    taskNavText: "text-teal-600",
+    taskNavhoverText: "hover:text-teal-900",
+  },
+};
+export default themeColors;
+
+type ThemeColorKeys = keyof (typeof themeColors)["etemad"];
+export type themeColorType = Record<ThemeColorKeys, string>;
+export type ThemeNames = keyof typeof themeColors;

@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "Iran Yekan";
+  src: url("/fonts/iranyekanwebregular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Iran Yekan";
+  src: url("/fonts/iranyekanwebbold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Iran Yekan";
+  src: url("/fonts/iranyekanweblight.ttf");
+  font-weight: lighter;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vazir";
+  src: url("/fonts/Vazir-Medium.ttf");
+  font-weight: medium;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vazir";
+  src: url("/fonts/Vazir-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vazir";
+  src: url("/fonts/Vazir-Light.ttf");
+  font-weight: lighter;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Vazir";
+  src: url("/fonts/Vazir-Thin.ttf");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lalezar";
+  src: url("/fonts/Lalezar-Regular.ttf");
+  font-weight: medium;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Iranian sans";
+  src: url("/fonts/Iranian\ Sans.ttf");
+  font-weight: normal;
+}
