@@ -8,5 +8,5 @@ export type TaskType = {
   state: string;
   todoDate: string;
   doneDate: string;
-  deleted: boolean;
+  deleted: number;
 };

@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
-import db from "../../../../../lib/db";
+import db from "../../../../../../lib/db";
 import sql from "mssql";
 
-export default async function GET(
+export async function GET(
   request: Request,
-  { params }: { params: { userId: string } }
+  context: { params: { userId: string } }
 ) {
+  const params = context.params;
   try {
     const sqlConnect = await db();
     const response = await sqlConnect
       .request()
       .input("userId", sql.NVarChar, params.userId)
       .query("SELECT * FROM tasks WHERE userId = @userId");
-    return NextResponse.json(response);
+    return NextResponse.json(response.recordset);
   } catch (err) {
     console.error("fetching user tasks error:", err);
     return NextResponse.json(

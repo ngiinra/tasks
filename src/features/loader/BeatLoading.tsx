@@ -7,7 +7,7 @@ export default function BeatLoading({ className }: { className?: string }) {
 
   return (
     <div className={`flex w-full items-center justify-center ${finalClass}`}>
-      <BeatLoader size="12" />
+      <BeatLoader size="12px" />
     </div>
   );
 }

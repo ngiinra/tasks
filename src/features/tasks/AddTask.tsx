@@ -1,19 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import TextInputWithLabel from "../TextInputWithLabel";
 import TextAreaWithLabel from "../TextAreaWithLabel";
-import { RiArrowGoBackLine } from "react-icons/ri";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import ButtonsContainer from "../ButtonsContainer";
 import PrimaryButton from "../PrimaryButton";
+import { Toaster } from "react-hot-toast";
+import useAddTaskForm from "./useAddTaskForm";
 
 function AddTask() {
-  const [clicked, setClicked] = useState<boolean>(false);
-  function handleShowForm() {
-    setClicked((pre) => !pre);
-  }
+  const { isLoading, clicked, task, setTask, handleShowForm, handleAddTask } =
+    useAddTaskForm();
   return (
     <div className="w-full border-1 rounded-md p-3 text-center">
+      <Toaster />
       <p
         className={`cursor-pointer transition-all duration-400 ${
           clicked ? "opacity-0 invisible h-0" : "visible opacity-100 h-auto"
@@ -36,21 +36,23 @@ function AddTask() {
         </div>
         <TextInputWithLabel
           label="عنوان*"
-          value="..."
+          value={task.title}
           sizes={["w-1/5", "w-4/5"]}
-          setterFn={() => {}}
+          setterFn={(val: string) => setTask((pre) => ({ ...pre, title: val }))}
         />
         <TextAreaWithLabel
           label="جزئیات"
-          value="..."
+          value={task.description}
           sizes={["w-1/5", "w-4/5"]}
-          setterFn={() => {}}
+          setterFn={(val: string) =>
+            setTask((pre) => ({ ...pre, description: val }))
+          }
         />
         <ButtonsContainer>
           <PrimaryButton
             text="افزودن"
-            isLoading={false}
-            onClick={() => {}}
+            isLoading={isLoading}
+            onClick={handleAddTask}
             extraClass="w-1/2"
           />
         </ButtonsContainer>
