@@ -11,6 +11,7 @@ export const baseApi = createApi({
     "Themes",
     "Languages",
     "Tasks",
+    "Lists",
   ], // هر چیزی که نیاز داری
   endpoints: () => ({}), // اینجا خالیه چون قراره از فایل‌های دیگه inject بشه
 });

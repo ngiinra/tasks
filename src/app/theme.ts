@@ -20,6 +20,10 @@ const themeColors = {
     taskNavBg: "bg-slate-300",
     taskNavText: "text-slate-600",
     taskNavhoverText: "hover:text-slate-900",
+    taskBg: "bg-slate-500/35",
+    taskShadow: "shadow-sm shadow-slate-500",
+    taskTagsBorder: "border-slate-400",
+    taskTagsBg: "bg-slate-500/50",
   },
   yashmi: {
     pageBg: "bg-teal-700",
@@ -42,6 +46,10 @@ const themeColors = {
     taskNavBg: "bg-teal-200",
     taskNavText: "text-teal-600",
     taskNavhoverText: "hover:text-teal-900",
+    taskBg: "bg-teal-500/35",
+    taskShadow: "shadow-sm shadow-teal-500",
+    taskTagsBorder: "border-teal-400",
+    taskTagsBg: "bg-teal-500/50",
   },
 };
 export default themeColors;

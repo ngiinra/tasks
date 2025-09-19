@@ -6,6 +6,7 @@ import { RiLogoutCircleRFill, RiSettings3Fill } from "react-icons/ri";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { SiGoogletasks } from "react-icons/si";
 import useTheme from "@/hooks/useTheme";
+import { CgArrangeBack } from "react-icons/cg";
 
 function DashboardNavbar() {
   const ui = useTheme();
@@ -19,6 +20,11 @@ function DashboardNavbar() {
         href="/dashboard"
       />
       <NavbarItem Icon={SiGoogletasks} title="تسک ها" href="/dashboard/tasks" />
+      <NavbarItem
+        Icon={CgArrangeBack}
+        title="تعاریف"
+        href="/dashboard/definitions"
+      />
       <NavbarItem
         Icon={RiSettings3Fill}
         title="تنظیمات شخصی"

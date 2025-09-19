@@ -1,5 +1,5 @@
 export type TaskType = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   tags: string;

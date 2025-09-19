@@ -7,7 +7,7 @@ export const tasksApi = baseApi.injectEndpoints({
       query(userId) {
         return `/tasks/user/${userId}`;
       },
-      providesTags: (_, __, userId) => [{ type: "Tasks", id: userId }],
+      providesTags: ["Tasks"],
     }),
 
     AddTask: builder.mutation({
@@ -19,10 +19,19 @@ export const tasksApi = baseApi.injectEndpoints({
           "Content-Type": "application/json",
         },
       }),
+      invalidatesTags: ["Tasks"],
     }),
 
-    getGeneratedTaskId: builder.query<string, void>({
+    getGeneratedTaskId: builder.query<number, void>({
       query: () => `tasks/generateId`,
+    }),
+
+    deleteTask: builder.mutation({
+      query: (taskId) => ({
+        url: `/tasks/${taskId}/delete`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Tasks"],
     }),
   }),
 });
@@ -31,4 +40,5 @@ export const {
   useAddTaskMutation,
   useGetUserTasksQuery,
   useLazyGetGeneratedTaskIdQuery,
+  useDeleteTaskMutation,
 } = tasksApi;

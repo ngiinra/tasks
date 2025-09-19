@@ -20,7 +20,7 @@ export default function useAddTaskForm() {
     doneDate: "",
     todoDate: "",
     userId: "",
-    id: "",
+    id: 0,
   };
   const dispatch = useDispatch();
   const [addTaskMutaion, { isLoading }] = useAddTaskMutation();
@@ -33,13 +33,9 @@ export default function useAddTaskForm() {
     setTask((pre) => ({ ...pre, userId: loginUser.userId.trim() }));
   }, [loginUser]);
 
-  function handleShowForm() {
-    setClicked((pre) => !pre);
-  }
-
   async function handleAddTask() {
     if (task.title.trim() && task.description.trim()) {
-      let generatedId: string | null = null;
+      let generatedId: number | null = null;
       const maxTries = 3;
       let tries = 0;
 
@@ -61,11 +57,12 @@ export default function useAddTaskForm() {
       }
 
       const newTask = { ...task, id: generatedId };
+      console.log(newTask);
       try {
         await addTaskMutaion(newTask).unwrap();
         toast.success("تسک با موفقیت اضافه شد.");
         dispatch(addTask(newTask));
-        setTask(initialTask);
+        setTask({ ...initialTask, userId: loginUser.userId.trim() });
         setClicked(false);
       } catch (err) {
         toast.error("افزودن تسک با خطا مواجه شد.");
@@ -73,5 +70,5 @@ export default function useAddTaskForm() {
     }
   }
 
-  return { isLoading, clicked, task, setTask, handleShowForm, handleAddTask };
+  return { isLoading, clicked, task, setTask, setClicked, handleAddTask };
 }

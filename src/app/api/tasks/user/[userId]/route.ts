@@ -12,7 +12,7 @@ export async function GET(
     const response = await sqlConnect
       .request()
       .input("userId", sql.NVarChar, params.userId)
-      .query("SELECT * FROM tasks WHERE userId = @userId");
+      .query("SELECT * FROM tasks WHERE userId = @userId and deleted= 0");
     return NextResponse.json(response.recordset);
   } catch (err) {
     console.error("fetching user tasks error:", err);

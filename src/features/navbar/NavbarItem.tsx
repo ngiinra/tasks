@@ -29,7 +29,7 @@ function NavbarItem({
       className={`relative ${isActive ? ui.navbarActive : ui.navbarItem}`}
     >
       <Icon className="size-8" />
-      <Toolbar text={title} showText={showText} />
+      <Toolbar showText={showText}>{title}</Toolbar>
     </Link>
   );
 }

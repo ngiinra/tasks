@@ -7,11 +7,13 @@ function PrimaryButton({
   onClick,
   extraClass,
   isLoading,
+  deactive,
 }: {
   text: string;
   onClick: Function;
   extraClass?: string;
   isLoading: boolean;
+  deactive?: boolean;
 }) {
   const ui = useTheme();
   return (
@@ -21,7 +23,7 @@ function PrimaryButton({
         e.preventDefault();
         onClick(e);
       }}
-      disabled={isLoading}
+      disabled={isLoading || deactive}
     >
       {isLoading ? "لطفا شکیبا باشید" : text}
     </button>

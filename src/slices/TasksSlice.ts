@@ -10,11 +10,12 @@ export const tasksSlice = createSlice({
   reducers: {
     addTask: (state, action: PayloadAction<TaskType>) => {
       state.push(action.payload);
+      console.log(state);
     },
 
     updateTask: (
       state,
-      action: PayloadAction<{ id: string; updates: Partial<TaskType> }>
+      action: PayloadAction<{ id: number; updates: Partial<TaskType> }>
     ) => {
       const index = state.findIndex((task) => task.id === action.payload.id);
       if (index !== -1) {
@@ -25,12 +26,12 @@ export const tasksSlice = createSlice({
       }
     },
 
-    deleteTask: (state, action: PayloadAction<string>) => {
-      state = state.filter((task) => task.id !== action.payload);
+    deleteTask: (state, action: PayloadAction<number>) => {
+      return state.filter((task) => task.id !== action.payload);
     },
 
     setTasks: (state, action: PayloadAction<TaskType[]>) => {
-      state = action.payload;
+      return action.payload;
     },
   },
 });

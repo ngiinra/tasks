@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     await pool
       .request()
       .input("title", sql.NVarChar, title)
-      .input("id", sql.NVarChar, id)
+      .input("id", sql.Int, Number(id))
       .input("description", sql.NVarChar, description)
       .input("tags", sql.NVarChar, tags)
       .input("list", sql.NVarChar, list)
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       .input("doneDate", sql.NVarChar, doneDate)
       .input("userId", sql.NVarChar, userId)
       .input("state", sql.NVarChar, state)
-      .input("deleted", sql.Bit, deleted)
+      .input("deleted", sql.Bit, deleted ? deleted : 0)
       .query(
         `INSERT INTO tasks (id, title, description, tags, list, todoDate, doneDate, userId, state, deleted)
          VALUES (@id, @title, @description, @tags, @list, @todoDate, @doneDate, @userId, @state, @deleted)`

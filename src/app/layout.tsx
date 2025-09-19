@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import DashboardNavbar from "@/features/navbar/DashboardNavbar";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StoreProvider>
+          <Toaster />
           <DashboardNavbar />
           {children}
         </StoreProvider>

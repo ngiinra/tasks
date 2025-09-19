@@ -4,11 +4,13 @@ import UserReducer from "@/slices/UserSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { baseApi } from "@/services/baseApi";
 import TasksSlice from "@/slices/TasksSlice";
+import ListsSlice from "@/slices/ListSlice";
 
 export const store = configureStore({
   reducer: {
     User: UserReducer,
     tasks: TasksSlice,
+    lists: ListsSlice,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

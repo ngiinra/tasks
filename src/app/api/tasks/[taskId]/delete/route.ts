@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "../../../../../lib/db";
+import db from "../../../../../../lib/db";
 
 export async function POST(
   _: Request,
@@ -10,8 +10,8 @@ export async function POST(
     const res = await dbConnect
       .request()
       .input("id", Number(params.taskId))
-      .query("");
-    return NextResponse.json(res.recordset[0]);
+      .query("UPDATE [dbo].[tasks] SET [deleted] = 1 WHERE [id]= @id");
+    return NextResponse.json({ success: res.rowsAffected[0] > 0 });
   } catch (err) {
     return NextResponse.json(
       { error: "Failed to delete task" },
