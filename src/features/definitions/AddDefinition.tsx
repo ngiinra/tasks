@@ -12,13 +12,14 @@ export default function AddDefinitions() {
     newDefinition,
     setNewDefinition,
     addListLoading,
+    addTagLoading,
     handleAddDefinition,
     clicked,
     setClicked,
   } = useAddDefinition();
   return (
     <AddEntityForm
-      isLoading={addListLoading}
+      isLoading={addListLoading || addTagLoading}
       entityName="تعاریف"
       clicked={clicked}
       setClicked={setClicked}

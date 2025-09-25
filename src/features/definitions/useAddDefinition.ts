@@ -4,6 +4,8 @@ import { RootState } from "../../../store";
 import { useAddListMutation } from "@/services/list/listApi";
 import { addList } from "@/slices/ListSlice";
 import toast from "react-hot-toast";
+import { useAddTagMutation } from "@/services/tags/tagsApi";
+import { addTag } from "@/slices/TagsSlice";
 
 export default function useAddDefinition() {
   type NewDefinitionType = {
@@ -33,6 +35,7 @@ export default function useAddDefinition() {
   }, [user.userId]);
   // لیست یا دسته بندی
   const [addListMutation, { isLoading: addListLoading }] = useAddListMutation();
+  const [addTagMutation, { isLoading: addTagLoading }] = useAddTagMutation();
   const dispatch = useDispatch();
   async function handleAddDefinition() {
     if (newDefinition.userId.trim() !== "") {
@@ -42,12 +45,14 @@ export default function useAddDefinition() {
             text: newDefinition.text,
             value: newDefinition.value,
             userId: newDefinition.userId,
+            active: 1,
           }).unwrap();
           dispatch(
             addList({
               text: newDefinition.text,
               value: newDefinition.value,
               userId: newDefinition.userId,
+              active: 1,
             })
           );
           toast.success("لیست افزوده شد.");
@@ -55,6 +60,30 @@ export default function useAddDefinition() {
           setClicked(false);
         } catch (err) {
           toast.error("افزودن لیست به خطا خورد.");
+          console.log(err);
+        }
+      }
+      if (newDefinition.cat === "tag") {
+        try {
+          await addTagMutation({
+            text: newDefinition.text,
+            value: newDefinition.value,
+            userId: newDefinition.userId,
+            active: 1,
+          }).unwrap();
+          dispatch(
+            addTag({
+              text: newDefinition.text,
+              value: newDefinition.value,
+              userId: newDefinition.userId,
+              active: 1,
+            })
+          );
+          toast.success("تگ اضافه شد.");
+          setNewDefinition({ ...initialVal, userId: newDefinition.userId });
+          setClicked(false);
+        } catch (err) {
+          toast.error("افزودن تگ به خطا خورد.");
           console.log(err);
         }
       }
@@ -66,6 +95,7 @@ export default function useAddDefinition() {
     newDefinition,
     setNewDefinition,
     addListLoading,
+    addTagLoading,
     handleAddDefinition,
     clicked,
     setClicked,

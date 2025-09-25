@@ -6,10 +6,22 @@ import ButtonsContainer from "../ButtonsContainer";
 import PrimaryButton from "../PrimaryButton";
 import useAddTaskForm from "./useAddTaskForm";
 import AddEntityForm from "../AddEntityForm";
+import SelectInputWithLabel from "../SelectInputWithLabel";
+import BeatLoading from "../loader/BeatLoading";
 
 function AddTask() {
-  const { isLoading, clicked, task, setTask, setClicked, handleAddTask } =
-    useAddTaskForm();
+  const {
+    isLoading,
+    clicked,
+    task,
+    setTask,
+    setClicked,
+    handleAddTask,
+    lists,
+    listsLoading,
+    tags,
+    tagsLoading,
+  } = useAddTaskForm();
   return (
     <AddEntityForm
       clicked={clicked}
@@ -29,6 +41,29 @@ function AddTask() {
         sizes={["w-1/5", "w-4/5"]}
         setterFn={(val: string) =>
           setTask((pre) => ({ ...pre, description: val }))
+        }
+      />
+      {listsLoading ? (
+        <BeatLoading />
+      ) : (
+        lists && (
+          <SelectInputWithLabel
+            label="دسته بندی"
+            defaultValue={task.list}
+            setValue={(val: string) =>
+              setTask((pre) => ({ ...pre, list: val }))
+            }
+            sizes={["w-1/5", "w-4/5"]}
+            options={lists}
+          />
+        )
+      )}
+      <TextInputWithLabel
+        label="تاریخ برنامه ریزی شده"
+        value={task.todoDate}
+        sizes={["w-1/5", "w-4/5"]}
+        setterFn={(val: string) =>
+          setTask((pre) => ({ ...pre, todoDate: val }))
         }
       />
       <ButtonsContainer>

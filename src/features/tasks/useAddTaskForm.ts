@@ -8,6 +8,8 @@ import {
 import toast from "react-hot-toast";
 import { addTask } from "@/slices/TasksSlice";
 import { useEffect, useState } from "react";
+import { useGetListQuery } from "@/services/list/listApi";
+import { useGetTagsQuery } from "@/services/tags/tagsApi";
 
 export default function useAddTaskForm() {
   const initialTask = {
@@ -28,6 +30,14 @@ export default function useAddTaskForm() {
   const [clicked, setClicked] = useState<boolean>(false);
   const loginUser = useSelector((store: RootState) => store.User);
   const [task, setTask] = useState<TaskType>(initialTask);
+  const { data: lists, isLoading: listsLoading } = useGetListQuery(
+    loginUser.userId.trim(),
+    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+  );
+  const { data: tags, isLoading: tagsLoading } = useGetTagsQuery(
+    loginUser.userId.trim(),
+    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+  );
 
   useEffect(() => {
     setTask((pre) => ({ ...pre, userId: loginUser.userId.trim() }));
@@ -70,5 +80,16 @@ export default function useAddTaskForm() {
     }
   }
 
-  return { isLoading, clicked, task, setTask, setClicked, handleAddTask };
+  return {
+    isLoading,
+    clicked,
+    task,
+    setTask,
+    setClicked,
+    handleAddTask,
+    lists,
+    listsLoading,
+    tags,
+    tagsLoading,
+  };
 }

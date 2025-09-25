@@ -31,7 +31,7 @@ function AddEntityForm({
       </p>
       <form
         className={`transition-all duration-200 overflow-hidden ${
-          clicked ? "visible opacity-100 h-65" : "opacity-0 invisible h-0"
+          clicked ? "visible opacity-100 min-h-65" : "opacity-0 invisible h-0"
         }`}
       >
         <div
