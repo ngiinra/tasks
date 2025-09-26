@@ -102,8 +102,10 @@ function TaskViewInList({ task }: { task: TaskType }) {
           >
             {tagsList.length > 0 && tagsList.at(0)?.trim() !== "" ? (
               tagsList.map((tag: string) => (
-                <span className="text-xs rounded-lg bg-stone-300 px-3 py-1">
-                  {tag}
+                <span
+                  className={`text-sm rounded-sm ${ui.taskTagBg} ml-0.5 px-0.5 opacity-70`}
+                >
+                  {"#" + tag}
                 </span>
               ))
             ) : (

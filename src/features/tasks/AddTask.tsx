@@ -8,6 +8,7 @@ import useAddTaskForm from "./useAddTaskForm";
 import AddEntityForm from "../AddEntityForm";
 import SelectInputWithLabel from "../SelectInputWithLabel";
 import BeatLoading from "../loader/BeatLoading";
+import MultiSelectWithLabel from "../MultiSelectWithLabel";
 
 function AddTask() {
   const {
@@ -55,6 +56,20 @@ function AddTask() {
             }
             sizes={["w-1/5", "w-4/5"]}
             options={lists}
+          />
+        )
+      )}
+      {tagsLoading ? (
+        <BeatLoading />
+      ) : (
+        tags && (
+          <MultiSelectWithLabel
+            label="تگ ها"
+            sizes={["w-1/5", "w-4/5"]}
+            list={tags}
+            setterFn={(val: string) =>
+              setTask((pre) => ({ ...pre, tags: val }))
+            }
           />
         )
       )}

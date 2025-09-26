@@ -24,6 +24,7 @@ const themeColors = {
     taskShadow: "shadow-sm shadow-slate-500",
     taskTagsBorder: "border-slate-400",
     taskTagsBg: "bg-slate-500/50",
+    taskTagBg: "bg-slate-100",
   },
   yashmi: {
     pageBg: "bg-teal-700",
@@ -50,6 +51,7 @@ const themeColors = {
     taskShadow: "shadow-sm shadow-teal-500",
     taskTagsBorder: "border-teal-400",
     taskTagsBg: "bg-teal-500/50",
+    taskTagBg: "bg-teal-800",
   },
 };
 export default themeColors;
