@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className=" text-sm lg:text-base">
         <StoreProvider>
           <Toaster />
           <DashboardNavbar />

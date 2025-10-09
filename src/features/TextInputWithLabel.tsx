@@ -7,12 +7,14 @@ function TextInputWithLabel({
   value,
   setterFn,
   inputExtraClass,
+  readonly,
 }: {
   sizes: string[];
   label: string;
   value: string;
   setterFn: Function;
   inputExtraClass?: string;
+  readonly?: boolean;
 }) {
   return (
     <div className="flex flex-col md:flex-row items-center w-full gap-x-2">
@@ -24,6 +26,7 @@ function TextInputWithLabel({
           value={value}
           setterFn={setterFn}
           extraClass={inputExtraClass}
+          readonly={readonly}
         />
       </div>
     </div>

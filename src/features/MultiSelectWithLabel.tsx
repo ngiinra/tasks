@@ -6,11 +6,13 @@ function MultiSelectWithLabel({
   label,
   list,
   setterFn,
+  defaultValues,
 }: {
   sizes: string[];
   label: string;
   list: { text: string; value: string }[];
   setterFn: Function;
+  defaultValues?: string[];
 }) {
   return (
     <div className="flex flex-col md:flex-row items-center w-full gap-x-2">
@@ -18,7 +20,11 @@ function MultiSelectWithLabel({
         <label className="w-full">{label}</label>
       </div>
       <div className={sizes[1]}>
-        <MultiSelect list={list} setterFn={setterFn} />
+        <MultiSelect
+          list={list}
+          setterFn={setterFn}
+          defaultValues={defaultValues}
+        />
       </div>
     </div>
   );

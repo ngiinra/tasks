@@ -10,6 +10,11 @@ export const tasksApi = baseApi.injectEndpoints({
       providesTags: ["Tasks"],
     }),
 
+    getTaskById: builder.query<TaskType, string>({
+      query: (taskId) => `/tasks/${taskId}`,
+      providesTags: ["Tasks"],
+    }),
+
     AddTask: builder.mutation({
       query: (taskData) => ({
         url: `/tasks`,
@@ -33,6 +38,18 @@ export const tasksApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Tasks"],
     }),
+
+    updateTask: builder.mutation({
+      query: (taskData) => ({
+        url: `/tasks/${taskData.id}`,
+        method: "PUT",
+        body: taskData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["Tasks"],
+    }),
   }),
 });
 
@@ -41,4 +58,6 @@ export const {
   useGetUserTasksQuery,
   useLazyGetGeneratedTaskIdQuery,
   useDeleteTaskMutation,
+  useGetTaskByIdQuery,
+  useUpdateTaskMutation,
 } = tasksApi;

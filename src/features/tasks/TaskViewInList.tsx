@@ -1,39 +1,27 @@
-import React, { useState } from "react";
 import { PiTrashSimple } from "react-icons/pi";
 import Toolbar from "../Toolbar";
 import useTheme from "@/hooks/useTheme";
-import { useDeleteTaskMutation } from "@/services/tasks/tasksApi";
-import { useDispatch } from "react-redux";
-import { deleteTask } from "@/slices/TasksSlice";
-import toast from "react-hot-toast";
 import { TaskType } from "@/types/TaskType";
 import { BeatLoader } from "react-spinners";
 import { showSomeOfText } from "@/utility/TextHelper";
 import SelectInput from "../SelectInput";
+import Link from "next/link";
+import useDeleteTask from "./useDeleteTask";
 
 function TaskViewInList({ task }: { task: TaskType }) {
   const { title, description, list, tags, id } = task;
   const tagsList = tags.split(",");
-  const [showDeleteToolbar, setShowDeleteToolbar] = useState<boolean>(false);
   const ui = useTheme();
-  const [deleteTaskMutation, { isLoading }] = useDeleteTaskMutation();
-  const dispatch = useDispatch();
-
-  async function deleteTaskHandeler(taskId: number) {
-    setShowDeleteToolbar(false);
-    try {
-      await deleteTaskMutation(taskId).unwrap();
-      dispatch(deleteTask(taskId));
-      toast.success("حذف با موفقیت انجام شد.");
-    } catch (err) {
-      toast.error("حذف وظیفه به مشکل خورد.");
-      console.error("Delete error:", err);
-    }
-  }
-
+  const {
+    showDeleteToolbar,
+    setShowDeleteToolbar,
+    deleteLoading,
+    deleteTaskHandeler,
+  } = useDeleteTask();
   return (
-    <div
-      className={`w-full h-full rounded-md ${ui.taskShadow} relative ${ui.taskBg}`}
+    <Link
+      className={`w-full h-full rounded-md ${ui.taskShadow} ${ui.mainBorder} relative ${ui.taskBg}`}
+      href={`/dashboard/tasks/${task.id}`}
     >
       <Toolbar showText={showDeleteToolbar} place="-top-[40%] right-[85%]">
         <div>
@@ -55,7 +43,7 @@ function TaskViewInList({ task }: { task: TaskType }) {
           </button>
         </div>
       </Toolbar>
-      {isLoading ? (
+      {deleteLoading ? (
         <div className="w-full h-full flex justify-center items-center bg-red-500/50 rounded-md">
           <BeatLoader />
         </div>
@@ -114,7 +102,7 @@ function TaskViewInList({ task }: { task: TaskType }) {
           </div>
         </div>
       )}
-    </div>
+    </Link>
   );
 }
 

@@ -7,13 +7,20 @@ import { IoCloseOutline } from "react-icons/io5";
 export default function MultiSelect({
   list,
   setterFn,
+  defaultValues,
 }: {
   list: { text: string; value: string }[];
   setterFn: Function;
+  defaultValues?: string[];
 }) {
   const ui = useTheme();
   const [isListDisplayed, setIsListDisplayed] = useState<boolean>(false);
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = useState<string[]>(
+    defaultValues || []
+  );
+  useEffect(() => {
+    if (defaultValues) setSelectedValues(defaultValues);
+  }, [defaultValues]);
   const selectedTexts = selectedValues
     .map((item) => list.find((option) => option.value === item)?.text)
     .join(" | ");
@@ -131,6 +138,7 @@ function ItemsList({
               <input
                 type="checkbox"
                 name="all"
+                id="all"
                 checked={isAllSelected}
                 onChange={toggleSelectAll}
               />
@@ -149,6 +157,7 @@ function ItemsList({
                       type="checkbox"
                       name={option.value}
                       value={option.value}
+                      id={option.value}
                       checked={selectedValues.includes(option.value)}
                       onChange={() => toggleSingle(option.value)}
                     />

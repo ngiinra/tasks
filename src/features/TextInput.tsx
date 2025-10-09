@@ -7,20 +7,30 @@ function TextInput({
   setterFn,
   extraClass,
   placeHolder,
+  name,
+  readonly = false,
 }: {
   value: string;
   setterFn: Function;
   extraClass?: string;
   placeHolder?: string;
+  name?: string;
+  readonly?: boolean;
 }) {
   const ui = useTheme();
   return (
     <input
       type="text"
       value={value}
+      name={name ? name : "textInput"}
       placeholder={placeHolder}
-      className={`px-3 py-2 border-1 ${ui.mainBorder} rounded-lg w-full outline-0 shadow-xs ${ui.inputBg} ${extraClass}`}
+      className={`px-3 py-2 ${
+        readonly ? ` bg-inherit` : `${ui.inputBg}`
+      } border-1 ${
+        ui.mainBorder
+      } rounded-lg w-full outline-0 shadow-xs ${extraClass}`}
       onChange={(e) => setterFn(e.target.value)}
+      readOnly={readonly}
     />
   );
 }

@@ -9,4 +9,7 @@ export type TaskType = {
   todoDate: string;
   doneDate: string;
   deleted: number;
+  estimateHour: string;
+  remainingHour: string;
+  completedHour: string;
 };
