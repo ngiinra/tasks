@@ -1,9 +1,5 @@
 "use client";
-import {
-  useGetTaskByIdQuery,
-  useUpdateTaskMutation,
-} from "@/services/tasks/tasksApi";
-import React, { useEffect, useState } from "react";
+
 import BeatLoading from "../loader/BeatLoading";
 import TextInputWithLabel from "../TextInputWithLabel";
 import SelectInputWithLabel from "../SelectInputWithLabel";
@@ -14,76 +10,37 @@ import ButtonsContainer from "../ButtonsContainer";
 import PrimaryButton from "../PrimaryButton";
 import Button from "../Button";
 import InputGroups from "../inputs/InputGroups";
-import { TaskType } from "@/types/TaskType";
-import { RootState } from "../../../store";
-import { useDispatch, useSelector } from "react-redux";
-import useGetListTag from "./useGetListTag";
 import Devider from "../Devider";
 import useDeleteTask from "./useDeleteTask";
 import Toolbar from "../Toolbar";
 import { BeatLoader } from "react-spinners";
-import { updateTask } from "@/slices/TasksSlice";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import useTaskView from "./useTaskView";
+
+const sizes = ["w-full md:w-1/6", "w-full md:w-5/6"];
+const colSizes = ["w-full md:w-1/3", "w-full md:w-2/3"];
 
 function TaskView({ taskId }: { taskId: string }) {
-  const { data, isLoading, isError } = useGetTaskByIdQuery(taskId);
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const sizes = ["w-full md:w-1/6", "w-full md:w-5/6"];
-  const colSizes = ["w-full md:w-1/3", "w-full md:w-2/3"];
-  const loginUser = useSelector((store: RootState) => store.User);
-  const { lists, listsLoading, tags, tagsLoading } = useGetListTag(loginUser);
-  const [task, setTask] = useState<TaskType>({
-    id: Number(taskId),
-    deleted: 0,
-    description: "",
-    doneDate: "",
-    list: "",
-    state: "",
-    tags: "",
-    title: "",
-    todoDate: "",
-    userId: "",
-    estimateHour: "",
-    remainingHour: "",
-    completedHour: "",
-  });
-  const [defaultSelectedTags, setDefaultSelectedTags] = useState<string[]>([]);
-  useEffect(() => {
-    if (data && tags) {
-      setTask(data);
-      setDefaultSelectedTags(
-        data.tags.split(",").map((dt) => {
-          const tag = tags.find((tag) => tag.text === dt);
-          return tag ? tag.value : "";
-        })
-      );
-    }
-  }, [data, tags]);
-  useEffect(() => {
-    if (loginUser) setTask((pre) => ({ ...pre, userId: loginUser.userId }));
-  }, [loginUser]);
   const {
     showDeleteToolbar,
     setShowDeleteToolbar,
     deleteLoading,
     deleteTaskHandeler,
   } = useDeleteTask();
-  const [useUpdate, { isLoading: isUpdating }] = useUpdateTaskMutation();
 
-  async function handleUpdateTask() {
-    if (!!task.title.trim()) {
-      try {
-        await useUpdate(task).unwrap();
-        dispatch(updateTask({ id: task.id, updates: task }));
-        toast.success("تسک اپدیت شد.");
-        router.push("/dashboard/tasks");
-      } catch {
-        toast.error("اپدیت تسک به خطا خورد");
-      }
-    }
-  }
+  const {
+    data,
+    isLoading,
+    isError,
+    lists,
+    listsLoading,
+    tags,
+    tagsLoading,
+    task,
+    setTask,
+    defaultSelectedTags,
+    isUpdating,
+    handleUpdateTask,
+  } = useTaskView(taskId);
 
   if (isLoading) return <BeatLoading />;
   if (!isLoading && isError && !task)
