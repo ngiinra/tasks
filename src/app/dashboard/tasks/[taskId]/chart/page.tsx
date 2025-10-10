@@ -1,15 +1,14 @@
 "use client";
+import LineAreaChart from "@/features/dashboard/baseCharts/LineAreaChart";
 import PageContent from "@/features/PageContent";
-import TaskView from "@/features/tasks/TaskView";
 import { useParams } from "next/navigation";
-import React from "react";
 
 function page() {
   const { taskId } = useParams();
   return (
-    <PageContent title="مشخصات وظیفه">
+    <PageContent title="نمودار وظیفه">
       {taskId && !Array.isArray(taskId) ? (
-        <TaskView taskId={taskId} />
+        <LineAreaChart />
       ) : (
         <div>تسک مورد نظر یافت نشد</div>
       )}

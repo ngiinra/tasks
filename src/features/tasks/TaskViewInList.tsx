@@ -20,7 +20,7 @@ function TaskViewInList({ task }: { task: TaskType }) {
   } = useDeleteTask();
   return (
     <Link
-      className={`w-full h-full rounded-md ${ui.taskShadow} ${ui.mainBorder} relative ${ui.taskBg}`}
+      className={`w-full rounded-md relative h-full`}
       href={`/dashboard/tasks/${task.id}`}
     >
       <Toolbar showText={showDeleteToolbar} place="-top-[40%] right-[85%]">
@@ -43,65 +43,69 @@ function TaskViewInList({ task }: { task: TaskType }) {
           </button>
         </div>
       </Toolbar>
-      {deleteLoading ? (
-        <div className="w-full h-full flex justify-center items-center bg-red-500/50 rounded-md">
-          <BeatLoader />
-        </div>
-      ) : (
-        <div className="h-full w-full overflow-hidden">
-          <div className="flex items-center mb-2 py-2 px-4 justify-between">
-            <span className="text-xs rounded-lg bg-slate-800/80 text-slate-200 px-3 py-1">
-              {list.trim() !== "" ? list : "بدون دسته بندی"}
-            </span>
-            <div className="flex gap-2">
-              <SelectInput
-                defaultValue={task.state}
-                options={[
-                  { text: "جدید", value: "NEW" },
-                  { text: "در حال انجام", value: "ACTIVE" },
-                  { text: "انجام شد", value: "DONE" },
-                ]}
-                setValue={() => {}}
-                extraClass="px-1 py-0.5 text-sm"
-              />
-              <button
-                className="cursor-pointer hover:text-red-500"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowDeleteToolbar((pre) => !pre);
-                }}
-              >
-                <PiTrashSimple />
-              </button>
-            </div>
+      <div
+        className={`w-full h-full rounded-md ${ui.taskShadow} ${ui.mainBorder} ${ui.taskBg} `}
+      >
+        {deleteLoading ? (
+          <div className="w-full h-full flex justify-center items-center bg-red-500/50 rounded-md">
+            <BeatLoader />
           </div>
-          <h3 className="font-bold pb-2 px-4">{title}</h3>
-          <p className="text-sm py-2 overflow-hidden px-4">
-            {showSomeOfText(description, 50)}
-          </p>
-          {(task.doneDate || task.todoDate) && (
+        ) : (
+          <div className="h-full w-full overflow-hidden">
+            <div className="flex items-center mb-2 py-2 px-4 justify-between">
+              <span className="text-xs rounded-lg bg-slate-800/80 text-slate-200 px-3 py-1">
+                {list.trim() !== "" ? list : "بدون دسته بندی"}
+              </span>
+              <div className="flex gap-2">
+                <SelectInput
+                  defaultValue={task.state}
+                  options={[
+                    { text: "جدید", value: "NEW" },
+                    { text: "در حال انجام", value: "ACTIVE" },
+                    { text: "انجام شد", value: "DONE" },
+                  ]}
+                  setValue={() => {}}
+                  extraClass="px-1 py-0.5 text-sm"
+                />
+                <button
+                  className="cursor-pointer hover:text-red-500"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowDeleteToolbar((pre) => !pre);
+                  }}
+                >
+                  <PiTrashSimple />
+                </button>
+              </div>
+            </div>
+            <h3 className="font-bold pb-2 px-4">{title}</h3>
+            <p className="text-sm py-2 overflow-hidden px-4">
+              {showSomeOfText(description, 50)}
+            </p>
             <div className="flex flex-col lg:flex-row items-center justify-between text-xs px-4 py-2">
               <p>تاریخ برنامه ریزی شده: {task.todoDate}</p>
               <p>تاریخ انجام: {task.doneDate}</p>
             </div>
-          )}
-          <div
-            className={`text-sm rounded-b-md border-t-1 h-full ${ui.taskTagsBorder} py-1 ${ui.taskTagsBg} px-4`}
-          >
-            {tagsList.length > 0 && tagsList.at(0)?.trim() !== "" ? (
-              tagsList.map((tag: string) => (
-                <span
-                  className={`text-sm rounded-sm ${ui.taskTagBg} ml-0.5 px-0.5 opacity-70`}
-                >
-                  {"#" + tag}
-                </span>
-              ))
-            ) : (
-              <p>بدون تگ</p>
-            )}
+
+            <div
+              className={`text-sm rounded-b-md border-t-1 h-full ${ui.taskTagsBorder} py-1 ${ui.taskTagsBg} px-4`}
+            >
+              {tagsList.length > 0 && tagsList.at(0)?.trim() !== "" ? (
+                tagsList.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className={`text-sm rounded-sm ${ui.taskTagBg} ml-0.5 px-0.5 opacity-70`}
+                  >
+                    {"#" + tag}
+                  </span>
+                ))
+              ) : (
+                <p>بدون تگ</p>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </Link>
   );
 }

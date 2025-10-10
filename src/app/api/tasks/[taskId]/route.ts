@@ -11,14 +11,14 @@ export async function GET(
     const res = await dbConnect
       .request()
       .input("id", Number(params.taskId))
-      .query("SELECT * FROM tasks WHERE id = @id");
+      .query("SELECT Top 1 * FROM tasks WHERE id = @id order by editTime desc");
     return NextResponse.json(res.recordset[0]);
   } catch (err) {
     return NextResponse.json({ error: "Failed to get task" }, { status: 500 });
   }
 }
 
-export async function PUT(
+export async function POST(
   request: Request,
   { params }: { params: { taskId: string } }
 ) {
@@ -42,6 +42,12 @@ export async function PUT(
     }
 
     const pool = await db();
+    const data = await pool
+      .request()
+      .input("id", sql.Int, Number(params.taskId))
+      .query(
+        "select TOP 1 * from [dbo].[tasks] WHERE [id]= @id order by editTime desc"
+      );
     await pool
       .request()
       .input("id", sql.Int, parseInt(params.taskId))
@@ -55,8 +61,11 @@ export async function PUT(
       .input("eHour", sql.NVarChar, estimateHour)
       .input("rHour", sql.NVarChar, remainingHour)
       .input("cHour", sql.NVarChar, completedHour)
+      .input("et", sql.DateTime, new Date())
+      .input("user", sql.Int, (await data.recordset[0]).userId)
+      .input("del", sql.Bit, (await data.recordset[0]).deleted)
       .query(
-        "UPDATE tasks SET title =@title, description= @desc, tags= @tags, list= @list, state= @state, todoDate= @todoDate,doneDate=@doneDate, estimateHour= @ehour, remainingHour=@rHour, completedHour= @cHour WHERE id = @id"
+        "Insert into tasks (title, description, tags, list, state, todoDate, doneDate, estimateHour, remainingHour, completedHour, userId, editTime, id, deleted ) values (@title, @desc, @tags, @list, @state, @todoDate, @doneDate, @ehour, @rHour, @cHour, @user, @et, @id, @del)"
       );
 
     return NextResponse.json({ success: true });

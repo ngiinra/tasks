@@ -1,6 +1,6 @@
 "use client";
 import useTheme from "@/hooks/useTheme";
-import React from "react";
+import React, { useState } from "react";
 import Pagetitle from "./Pagetitle";
 
 function PageContent({
@@ -12,9 +12,9 @@ function PageContent({
 }) {
   const ui = useTheme();
   return (
-    <div className="pt-5">
+    <div className={`pt-5`}>
       <div
-        className={`lg:mx-auto max-w-6xl p-10 rounded-lg ${ui.pageBg} ${ui.pageText}`}
+        className={`min-h-screen lg:mx-auto max-w-6xl p-10 rounded-lg ${ui.pageBg} ${ui.pageText}`}
       >
         <Pagetitle title={title} />
         {children}

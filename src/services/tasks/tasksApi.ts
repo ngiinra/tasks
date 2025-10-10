@@ -42,7 +42,7 @@ export const tasksApi = baseApi.injectEndpoints({
     updateTask: builder.mutation({
       query: (taskData) => ({
         url: `/tasks/${taskData.id}`,
-        method: "PUT",
+        method: "POST",
         body: taskData,
         headers: {
           "Content-Type": "application/json",

@@ -36,9 +36,10 @@ export async function POST(request: Request) {
       .input("userId", sql.NVarChar, userId)
       .input("state", sql.NVarChar, state)
       .input("deleted", sql.Bit, deleted ? deleted : 0)
+      .input("et", sql.DateTime, new Date())
       .query(
-        `INSERT INTO tasks (id, title, description, tags, list, todoDate, doneDate, userId, state, deleted)
-         VALUES (@id, @title, @description, @tags, @list, @todoDate, @doneDate, @userId, @state, @deleted)`
+        `INSERT INTO tasks (id, title, description, tags, list, todoDate, doneDate, userId, state, deleted, editTime)
+         VALUES (@id, @title, @description, @tags, @list, @todoDate, @doneDate, @userId, @state, @deleted, @et)`
       );
 
     return NextResponse.json({ success: true });

@@ -1,5 +1,6 @@
 import PageContent from "@/features/PageContent";
 import { Metadata } from "next";
+import DashboardPage from "@/features/dashboard/DashboardPage";
 export const metadata: Metadata = {
   title: "user dashboard",
   description: "Login user dshboard",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <PageContent title="داشبورد">
-      <p>سلام</p>
+      <DashboardPage />
     </PageContent>
   );
 }

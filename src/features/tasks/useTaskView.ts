@@ -10,8 +10,10 @@ import { TaskType } from "@/types/TaskType";
 import { RootState } from "../../../store";
 import { updateTask } from "@/slices/TasksSlice";
 import toast from "react-hot-toast";
+import DateHelper from "@/utility/DateHelper";
 
 export default function useTaskView(taskId: string) {
+  const dateHelper = new DateHelper();
   const { data, isLoading, isError } = useGetTaskByIdQuery(taskId);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -35,7 +37,21 @@ export default function useTaskView(taskId: string) {
   const [defaultSelectedTags, setDefaultSelectedTags] = useState<string[]>([]);
   useEffect(() => {
     if (data && tags) {
-      setTask(data);
+      setTask({
+        id: Number(taskId),
+        deleted: data.deleted,
+        description: data.description || "",
+        doneDate: data.doneDate || "",
+        list: data.list || "",
+        state: data.state,
+        tags: data.tags || "",
+        title: data.title,
+        todoDate: data.todoDate || "",
+        userId: data.userId,
+        estimateHour: data.estimateHour || "",
+        remainingHour: data.remainingHour || "",
+        completedHour: data.completedHour || "",
+      });
       setDefaultSelectedTags(
         data.tags.split(",").map((dt) => {
           const tag = tags.find((tag) => tag.text === dt);
@@ -52,6 +68,9 @@ export default function useTaskView(taskId: string) {
 
   async function handleUpdateTask() {
     if (!!task.title.trim()) {
+      if (task.state === "DONE") {
+        task.doneDate = dateHelper.getPersianDateOf(0);
+      }
       try {
         await useUpdate(task).unwrap();
         dispatch(updateTask({ id: task.id, updates: task }));
@@ -76,5 +95,6 @@ export default function useTaskView(taskId: string) {
     defaultSelectedTags,
     isUpdating,
     handleUpdateTask,
+    router,
   };
 }

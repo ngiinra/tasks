@@ -6,12 +6,14 @@ function InputGroups({
   name,
   options,
   defaultValue,
+  setValue,
 }: {
   sizes: string[];
   label: string;
   name: string;
   options: { label: string; value: string }[];
   defaultValue?: string;
+  setValue: Function;
 }) {
   return (
     <div className={`flex w-full items-center flex-wrap`}>
@@ -32,6 +34,7 @@ function InputGroups({
                 defaultValue?.toLocaleLowerCase() ===
                 option.value.toLocaleLowerCase()
               }
+              onClick={() => setValue(option.value)}
               className="size-4"
             />
           </div>

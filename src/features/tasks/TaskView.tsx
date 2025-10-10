@@ -40,6 +40,7 @@ function TaskView({ taskId }: { taskId: string }) {
     defaultSelectedTags,
     isUpdating,
     handleUpdateTask,
+    router,
   } = useTaskView(taskId);
 
   if (isLoading) return <BeatLoading />;
@@ -115,6 +116,9 @@ function TaskView({ taskId }: { taskId: string }) {
               ]}
               defaultValue={task.state}
               sizes={colSizes}
+              setValue={(val: string) =>
+                setTask((pre) => ({ ...pre, state: val }))
+              }
             />
           )}
         </div>
@@ -215,6 +219,11 @@ function TaskView({ taskId }: { taskId: string }) {
             isLoading={isUpdating}
             onClick={handleUpdateTask}
             extraClass="w-full md:w-1/4"
+          />
+          <Button
+            text="نمودار وضعیت"
+            isLoading={false}
+            onClick={() => router.push(`/dashboard/tasks/${taskId}/chart`)}
           />
         </ButtonsContainer>
       </form>

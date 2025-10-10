@@ -13,11 +13,11 @@ function TasksList() {
         {isLoading ? (
           <BeatLoading />
         ) : isSuccess && tasks && tasks.length === 0 ? (
-          <div>وظیفه ای یافت نشد.</div>
+          <div key="not-found">وظیفه ای یافت نشد.</div>
         ) : isSuccess && tasks && tasks.length > 0 ? (
           tasks.map((task: TaskType) => (
-            <div className="w-full md:w-1/2 p-3 min-h-45" key={task.id}>
-              <TaskViewInList task={task} />
+            <div className="w-full md:w-1/2 p-3 h-100 " key={task.id}>
+              <TaskViewInList task={task} key={task.id} />
             </div>
           ))
         ) : (

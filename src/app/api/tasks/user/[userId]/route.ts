@@ -12,7 +12,9 @@ export async function GET(
     const response = await sqlConnect
       .request()
       .input("userId", sql.NVarChar, params.userId)
-      .query("SELECT * FROM tasks WHERE userId = @userId and deleted= 0");
+      .query(
+        "SELECT t.* FROM tasks t INNER JOIN (SELECT id, MAX(editTime) AS MaxEditTime FROM tasks WHERE userId = @userId AND deleted = 0 GROUP BY id) latest ON t.id = latest.id AND t.editTime = latest.MaxEditTime WHERE t.userId = @userId AND t.deleted = 0 ORDER BY t.editTime DESC;"
+      );
     return NextResponse.json(response.recordset);
   } catch (err) {
     console.error("fetching user tasks error:", err);

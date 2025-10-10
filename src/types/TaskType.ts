@@ -12,4 +12,6 @@ export type TaskType = {
   estimateHour: string;
   remainingHour: string;
   completedHour: string;
+  editTime?: string;
+  guid?: number;
 };
