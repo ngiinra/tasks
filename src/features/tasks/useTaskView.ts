@@ -2,7 +2,7 @@ import {
   useGetTaskByIdQuery,
   useUpdateTaskMutation,
 } from "@/services/tasks/tasksApi";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import useGetListTag from "./useGetListTag";
 import { useEffect, useState } from "react";
