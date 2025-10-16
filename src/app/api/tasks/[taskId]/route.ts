@@ -61,7 +61,7 @@ export async function POST(
       .input("eHour", sql.NVarChar, estimateHour)
       .input("rHour", sql.NVarChar, remainingHour)
       .input("cHour", sql.NVarChar, completedHour)
-      .input("et", sql.DateTime, new Date())
+      .input("et", sql.DateTime, new Date().toISOString())
       .input("user", sql.Int, (await data.recordset[0]).userId)
       .input("del", sql.Bit, (await data.recordset[0]).deleted)
       .query(

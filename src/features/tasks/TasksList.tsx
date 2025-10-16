@@ -16,7 +16,7 @@ function TasksList() {
           <div key="not-found">وظیفه ای یافت نشد.</div>
         ) : isSuccess && tasks && tasks.length > 0 ? (
           tasks.map((task: TaskType) => (
-            <div className="w-full md:w-1/2 p-3 h-100 " key={task.id}>
+            <div className="w-full md:w-1/2 p-3 h-53 " key={task.id}>
               <TaskViewInList task={task} key={task.id} />
             </div>
           ))

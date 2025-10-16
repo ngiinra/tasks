@@ -1,7 +1,7 @@
 "use client";
 import useTheme from "@/hooks/useTheme";
 import { useEffect, useState } from "react";
-import TextInput from "./TextInput";
+import TextInput from "./TextInput"
 import { IoCloseOutline } from "react-icons/io5";
 
 export default function MultiSelect({

@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import TextInputWithLabel from "../TextInputWithLabel";
-import ButtonsContainer from "../ButtonsContainer";
-import PrimaryButton from "../PrimaryButton";
-import Devider from "../Devider";
-import SelectInputWithLabel from "../SelectInputWithLabel";
+import TextInputWithLabel from "../infrastructure/inputs/TextInputWithLabel";
+import ButtonsContainer from "../infrastructure/buttons/ButtonsContainer";
+import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
+import Devider from "../infrastructure/Devider";
+import SelectInputWithLabel from "../infrastructure/inputs/SelectInputWithLabel";
 import { useDispatch, useSelector } from "react-redux";
 import { theme, languages } from "@/slices/SettingSlice";
 import { useGetFontsQuery } from "@/services/fontsApi";

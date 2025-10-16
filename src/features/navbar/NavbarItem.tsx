@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import Toolbar from "../Toolbar";
+import Toolbar from "../infrastructure/Toolbar";
 import useTheme from "@/hooks/useTheme";
 import { usePathname } from "next/navigation";
 

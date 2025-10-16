@@ -1,7 +1,7 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import Devider from "../Devider";
+import Devider from "../infrastructure/Devider";
 import AddDefinitions from "./AddDefinition";
 import DefinitionList from "./DefinitionList";
 import { RootState } from "../../../store";

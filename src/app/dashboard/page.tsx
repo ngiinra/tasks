@@ -1,4 +1,4 @@
-import PageContent from "@/features/PageContent";
+import PageContent from "@/features/infrastructure/page/PageContent";
 import { Metadata } from "next";
 import DashboardPage from "@/features/dashboard/DashboardPage";
 export const metadata: Metadata = {

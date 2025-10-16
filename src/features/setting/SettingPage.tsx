@@ -1,5 +1,5 @@
 import SettingForm from "./SettingForm";
-import PageContent from "../PageContent";
+import PageContent from "../infrastructure/page/PageContent";
 
 function SettingPage() {
   return (

@@ -3,7 +3,7 @@ export function showSomeOfText(text: string, charactersCount: number = 90) {
     let textArr = text.split("");
     textArr = textArr.slice(0, charactersCount);
     let res = textArr.join("");
-    return res.concat(" ...");
+    return res.concat("...");
   } else {
     return text;
   }

@@ -1,4 +1,4 @@
-import PageContent from "@/features/PageContent";
+import PageContent from "@/features/infrastructure/page/PageContent";
 import AddTask from "@/features/tasks/AddTask";
 import TasksList from "@/features/tasks/TasksList";
 import React from "react";

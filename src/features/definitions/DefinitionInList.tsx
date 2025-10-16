@@ -1,11 +1,11 @@
 "use client";
 import { DefinitionType } from "@/types/definitionsType";
 import React, { useState } from "react";
-import TextInput from "../TextInput";
+import TextInput from "../infrastructure/inputs/TextInput";
 import useTheme from "@/hooks/useTheme";
 import { RiLightbulbFlashFill, RiLightbulbLine } from "react-icons/ri";
-import PrimaryButton from "../PrimaryButton";
-import Button from "../Button";
+import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
+import Button from "../infrastructure/buttons/Button";
 
 function DefinitionInList({ data }: { data: DefinitionType }) {
   const ui = useTheme();

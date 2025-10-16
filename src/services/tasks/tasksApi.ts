@@ -50,6 +50,13 @@ export const tasksApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Tasks"],
     }),
+
+    getHistory: builder.query<TaskType[], string>({
+      query(taskId) {
+        return `/tasks/${taskId}/history`;
+      },
+      providesTags: ["TaskHistory"],
+    }),
   }),
 });
 
@@ -60,4 +67,5 @@ export const {
   useDeleteTaskMutation,
   useGetTaskByIdQuery,
   useUpdateTaskMutation,
+  useGetHistoryQuery,
 } = tasksApi;

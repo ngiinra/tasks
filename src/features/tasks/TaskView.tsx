@@ -1,18 +1,18 @@
 "use client";
 
 import BeatLoading from "../loader/BeatLoading";
-import TextInputWithLabel from "../TextInputWithLabel";
-import SelectInputWithLabel from "../SelectInputWithLabel";
-import MultiSelectWithLabel from "../MultiSelectWithLabel";
-import TextInput from "../TextInput";
-import TextArea from "../TextArea";
-import ButtonsContainer from "../ButtonsContainer";
-import PrimaryButton from "../PrimaryButton";
-import Button from "../Button";
-import InputGroups from "../inputs/InputGroups";
-import Devider from "../Devider";
+import TextInputWithLabel from "../infrastructure/inputs/TextInputWithLabel";
+import SelectInputWithLabel from "../infrastructure/inputs/SelectInputWithLabel";
+import MultiSelectWithLabel from "../infrastructure/inputs/MultiSelectWithLabel";
+import TextInput from "../infrastructure/inputs/TextInput";
+import TextArea from "../infrastructure/inputs/TextArea";
+import ButtonsContainer from "../infrastructure/buttons/ButtonsContainer";
+import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
+import Button from "../infrastructure/buttons/Button";
+import InputGroups from "../infrastructure/inputs/InputGroups";
+import Devider from "../infrastructure/Devider";
 import useDeleteTask from "./useDeleteTask";
-import Toolbar from "../Toolbar";
+import Toolbar from "../infrastructure/Toolbar";
 import { BeatLoader } from "react-spinners";
 import useTaskView from "./useTaskView";
 
@@ -219,11 +219,6 @@ function TaskView({ taskId }: { taskId: string }) {
             isLoading={isUpdating}
             onClick={handleUpdateTask}
             extraClass="w-full md:w-1/4"
-          />
-          <Button
-            text="نمودار وضعیت"
-            isLoading={false}
-            onClick={() => router.push(`/dashboard/tasks/${taskId}/chart`)}
           />
         </ButtonsContainer>
       </form>

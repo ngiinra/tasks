@@ -1,9 +1,9 @@
 "use client";
-import TextInputWithLabel from "../TextInputWithLabel";
-import SelectInputWithLabel from "../SelectInputWithLabel";
-import PrimaryButton from "../PrimaryButton";
+import TextInputWithLabel from "../infrastructure/inputs/TextInputWithLabel";
+import SelectInputWithLabel from "../infrastructure/inputs/SelectInputWithLabel";
+import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
 import useAddDefinition from "./useAddDefinition";
-import AddEntityForm from "../AddEntityForm";
+import AddEntityForm from "../infrastructure/forms/AddEntityForm";
 
 const sizes = ["md:w-1/4 w-full", "md:w-3/4 w-full"];
 export default function AddDefinitions() {

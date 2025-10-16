@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
-import TextInputWithLabel from "../TextInputWithLabel";
-import TextAreaWithLabel from "../TextAreaWithLabel";
-import ButtonsContainer from "../ButtonsContainer";
-import PrimaryButton from "../PrimaryButton";
+import TextInputWithLabel from "../infrastructure/inputs/TextInputWithLabel";
+import TextAreaWithLabel from "../infrastructure/inputs/TextAreaWithLabel";
+import ButtonsContainer from "../infrastructure/buttons/ButtonsContainer";
+import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
 import useAddTaskForm from "./useAddTaskForm";
-import AddEntityForm from "../AddEntityForm";
-import SelectInputWithLabel from "../SelectInputWithLabel";
+import AddEntityForm from "../infrastructure/forms/AddEntityForm";
+import SelectInputWithLabel from "../infrastructure/inputs/SelectInputWithLabel";
 import BeatLoading from "../loader/BeatLoading";
-import MultiSelectWithLabel from "../MultiSelectWithLabel";
+import MultiSelectWithLabel from "../infrastructure/inputs/MultiSelectWithLabel";
 
 function AddTask() {
   const {

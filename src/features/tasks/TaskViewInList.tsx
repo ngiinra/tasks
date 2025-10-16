@@ -1,10 +1,10 @@
 import { PiTrashSimple } from "react-icons/pi";
-import Toolbar from "../Toolbar";
+import Toolbar from "../infrastructure/Toolbar";
 import useTheme from "@/hooks/useTheme";
 import { TaskType } from "@/types/TaskType";
 import { BeatLoader } from "react-spinners";
 import { showSomeOfText } from "@/utility/TextHelper";
-import SelectInput from "../SelectInput";
+import SelectInput from "../infrastructure/inputs/SelectInput";
 import Link from "next/link";
 import useDeleteTask from "./useDeleteTask";
 
