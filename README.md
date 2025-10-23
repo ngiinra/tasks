@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management System
 
-## Getting Started
+A customizable web application for managing tasks efficiently, built with React, Next.js, and TypeScript.
 
-First, run the development server:
+## Features
+
+- **Initial Definitions Management**: User can create and edit foundational definitions for tasks.
+- **Task Creation & Editing**: Define tasks with detailed attributes and update them anytime.
+- **Date-Based Storage**: Tasks are stored and tracked based on timestamps.
+- **Task History**: View historical changes to task values over time.
+- **Time Tracking**:
+  - Deadline
+  - Estimated hours
+  - Logged hours
+  - Remaining time
+- **Time Comparison Charts**: Visualize estimated vs. actual time spent per task.
+- **Global Analytics**: Aggregate charts and insights based on all tasks.
+- **User Personalization**:
+  - Custom font, theme, and language settings
+  - Each user can have their own preferences and definitions
+
+## Tech Stack
+
+| Technology        | Purpose                                      |
+|-------------------|----------------------------------------------|
+| **React**         | UI development                               |
+| **Next.js**       | Server-side rendering & routing              |
+| **TypeScript**    | Type-safe development                        |
+| **SQL Server**    | Relational database                          |
+| **Redux Toolkit** | State management                             |
+| **RTK Query**     | Data fetching and caching                    |
+| **TailwindCSS**   | Utility-first styling                        |
+| **MSSQL**         | Database connectivity                        |
+
+## Installation
 
 ```bash
+git clone https://github.com/ngiinra/tasks.git
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
+### Tasks view
+<img width="1712" height="872" alt="image" src="https://github.com/user-attachments/assets/54c9d94d-be91-4027-94f1-7d7cf2c2428e" />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Personnel setting panel
+<img width="1716" height="867" alt="image" src="https://github.com/user-attachments/assets/6176a8cc-ae6c-4f01-aaa3-92d372ed9505" />
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
