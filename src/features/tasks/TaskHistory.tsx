@@ -23,13 +23,14 @@ function TaskHistory({ taskId }: { taskId: string }) {
     }
   }, [data]);
 
-  console.log(cards, cards.reverse());
   if (isLoading) return <BeatLoading />;
   return (
     <div>
       <ul className="flex flex-col gap-5">
         {!!cards && cards.length > 0 ? (
-          [...cards].reverse().map((d) => <HistoryCard cardData={d} />)
+          [...cards]
+            .reverse()
+            .map((d) => <HistoryCard cardData={d} key={d.editTime} />)
         ) : (
           <div className="opacity-60">برای وظیفه تاریخچه ای وجود ندارد.</div>
         )}
@@ -73,10 +74,11 @@ function HistoryCard({ cardData }: { cardData: CardType }) {
         {cardData.changes.map((change) => (
           <div
             className={`flex flex-col md:flex-row w-full border-b-1 ${ui.mainBorder}`}
+            key={change.key}
           >
-            <td className="p-1 flex-1">{change.key}</td>
-            <td className="p-1 flex-1">{change.before}</td>
-            <td className="p-1 flex-1">{change.after}</td>
+            <div className="p-1 flex-1">{change.key}</div>
+            <div className="p-1 flex-1">{change.before}</div>
+            <div className="p-1 flex-1">{change.after}</div>
           </div>
         ))}
       </div>

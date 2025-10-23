@@ -1,51 +1,45 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+type XYData = {
+  name: string;
+  type?: string;
+  values: number[];
+};
 
-function LineAreaChart() {
+function LineAreaChart({
+  firstXYData,
+  secondXYData,
+  labels,
+  yTitle,
+}: {
+  firstXYData: XYData;
+  secondXYData: XYData;
+  labels: string[];
+  yTitle: string;
+}) {
   const [state, setState] = useState({
     series: [
       {
-        name: "TEAM A",
+        name: firstXYData.name,
         type: "area",
-        data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33],
+        data: firstXYData.values,
       },
       {
-        name: "TEAM B",
-        type: "line",
-        data: [55, 69, 45, 61, 43, 54, 37, 52, 44, 61, 43],
+        name: secondXYData.name,
+        type: "area",
+        data: secondXYData.values,
       },
     ],
     options: {
       fill: {
         type: "solid",
-        opacity: [0.35, 1],
+        opacity: [0.55, 0.5],
       },
-      labels: [
-        "Dec 01",
-        "Dec 02",
-        "Dec 03",
-        "Dec 04",
-        "Dec 05",
-        "Dec 06",
-        "Dec 07",
-        "Dec 08",
-        "Dec 09 ",
-        "Dec 10",
-        "Dec 11",
-      ],
-      markers: {
-        size: 0,
-      },
+      labels: labels,
       yaxis: [
         {
           title: {
-            text: "Series A",
-          },
-        },
-        {
-          opposite: true,
-          title: {
-            text: "Series B",
+            text: yTitle,
           },
         },
       ],

@@ -41,12 +41,22 @@ export default function useTaskView(taskId: string) {
         id: Number(taskId),
         deleted: data.deleted,
         description: data.description || "",
-        doneDate: data.doneDate || "",
+        doneDate:
+          new Date(data.doneDate).toLocaleDateString("fa-IR-u-nu-latn", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }) || "",
         list: data.list || "",
         state: data.state,
         tags: data.tags || "",
         title: data.title,
-        todoDate: data.todoDate || "",
+        todoDate:
+          new Date(data.todoDate).toLocaleDateString("fa-IR-u-nu-latn", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }) || "",
         userId: data.userId,
         estimateHour: data.estimateHour || "",
         remainingHour: data.remainingHour || "",
@@ -68,14 +78,26 @@ export default function useTaskView(taskId: string) {
 
   async function handleUpdateTask() {
     if (!!task.title.trim()) {
+      const editedTask = task;
+      if (task.todoDate) {
+        const todoDateGDate = dateHelper.convertJalaliToGregorian(
+          Number(task.todoDate.split("/")[0]),
+          Number(task.todoDate.split("/")[1]),
+          Number(task.todoDate.split("/")[2])
+        );
+        console.log(todoDateGDate);
+        editedTask.todoDate =
+          todoDateGDate[0] + "-" + todoDateGDate[1] + "-" + todoDateGDate[2];
+      }
+      console.log(editedTask.todoDate);
       if (task.state === "DONE") {
-        task.doneDate = dateHelper.getPersianDateOf(0);
+        editedTask.doneDate = new Date().toLocaleDateString("us");
+        console.log(editedTask.doneDate);
       }
       try {
-        await useUpdate(task).unwrap();
-        dispatch(updateTask({ id: task.id, updates: task }));
+        await useUpdate(editedTask).unwrap();
+        dispatch(updateTask({ id: task.id, updates: editedTask }));
         toast.success("تسک اپدیت شد.");
-        router.push("/dashboard/tasks");
       } catch {
         toast.error("اپدیت تسک به خطا خورد");
       }

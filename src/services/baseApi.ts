@@ -11,7 +11,6 @@ export const baseApi = createApi({
     "Themes",
     "Languages",
     "Tasks",
-    "TaskHistory",
     "Lists",
     "Tags",
   ], // هر چیزی که نیاز داری

@@ -27,7 +27,7 @@ function page() {
       {tab === tabsData[0].title && !Array.isArray(taskId) ? (
         <TaskView taskId={taskId} />
       ) : tab === tabsData[1].title && !Array.isArray(taskId) ? (
-        <TaskChart />
+        <TaskChart taskId={taskId} />
       ) : (
         tab === tabsData[2].title &&
         !Array.isArray(taskId) && <TaskHistory taskId={taskId} />

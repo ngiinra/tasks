@@ -10,7 +10,9 @@ export async function GET(
     const res = await dbConnect
       .request()
       .input("id", Number(params.taskId))
-      .query("SELECT * FROM tasks WHERE id = @id order by editTime");
+      .query(
+        "WITH RankedTasks AS ( SELECT *, CAST(editTime AS DATE) AS editDate, ROW_NUMBER() OVER (PARTITION BY CAST(editTime AS DATE) ORDER BY editTime DESC) AS rn FROM tasks WHERE id = @id) SELECT * FROM RankedTasks WHERE rn = 1 ORDER BY editDate;"
+      );
     return NextResponse.json(res.recordset);
   } catch (err) {
     return NextResponse.json({ error: "Failed to get task" }, { status: 500 });
