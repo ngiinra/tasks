@@ -47,3 +47,7 @@ npm run dev
 ### Personnel setting panel
 <img width="1716" height="867" alt="image" src="https://github.com/user-attachments/assets/6176a8cc-ae6c-4f01-aaa3-92d372ed9505" />
 
+### Task chart
+<img width="1695" height="867" alt="image" src="https://github.com/user-attachments/assets/575cc232-c9ec-4aa8-a0fd-37226496e87d" />
+
+
