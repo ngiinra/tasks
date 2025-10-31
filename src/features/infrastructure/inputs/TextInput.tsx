@@ -10,7 +10,7 @@ function TextInput({
   name,
   readonly = false,
 }: {
-  value: string;
+  value: string | null;
   setterFn: Function;
   extraClass?: string;
   placeHolder?: string;
@@ -21,7 +21,7 @@ function TextInput({
   return (
     <input
       type="text"
-      value={value}
+      value={!!value ? value : ""}
       name={name ? name : "textInput"}
       placeholder={placeHolder}
       className={`px-3 py-2 ${

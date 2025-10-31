@@ -23,6 +23,9 @@ export default function useAddTaskForm() {
     todoDate: "",
     userId: "",
     id: 0,
+    estimateHour: "0",
+    remainingHour: "0",
+    completedHour: "0",
   };
   const dispatch = useDispatch();
   const [addTaskMutaion, { isLoading }] = useAddTaskMutation();
@@ -67,8 +70,12 @@ export default function useAddTaskForm() {
         return;
       }
 
-      const newTask = { ...task, id: generatedId };
-      console.log(newTask);
+      const newTask = {
+        ...task,
+        id: generatedId,
+        doneDate: null,
+        todoDate: !!task.todoDate ? task.todoDate : null,
+      };
       try {
         await addTaskMutaion(newTask).unwrap();
         toast.success("تسک با موفقیت اضافه شد.");

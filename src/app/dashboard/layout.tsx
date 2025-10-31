@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import DashboardClientWrapper from "./DasboardClientWrapper";
+import DashboardNavbar from "@/features/navbar/DashboardNavbar";
 
 export default async function DashboardLayout({
   children,
@@ -15,6 +16,10 @@ export default async function DashboardLayout({
   }
 
   return (
-    <DashboardClientWrapper userId={userId}>{children}</DashboardClientWrapper>
+    <DashboardClientWrapper userId={userId}>
+      {" "}
+      <DashboardNavbar />
+      {children}
+    </DashboardClientWrapper>
   );
 }

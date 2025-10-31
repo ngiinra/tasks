@@ -6,8 +6,8 @@ export type TaskType = {
   list: string;
   userId: string;
   state: string;
-  todoDate: string;
-  doneDate: string;
+  todoDate: string | null;
+  doneDate: string | null;
   deleted: number;
   estimateHour: string;
   remainingHour: string;

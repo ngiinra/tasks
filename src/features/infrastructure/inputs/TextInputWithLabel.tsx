@@ -11,7 +11,7 @@ function TextInputWithLabel({
 }: {
   sizes: string[];
   label: string;
-  value: string;
+  value: string | null;
   setterFn: Function;
   inputExtraClass?: string;
   readonly?: boolean;

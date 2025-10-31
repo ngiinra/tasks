@@ -41,22 +41,16 @@ export default function useTaskView(taskId: string) {
         id: Number(taskId),
         deleted: data.deleted,
         description: data.description || "",
-        doneDate:
-          new Date(data.doneDate).toLocaleDateString("fa-IR-u-nu-latn", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }) || "",
+        doneDate: !!data.doneDate
+          ? dateHelper.convertToPersianDate(data.doneDate)
+          : "",
         list: data.list || "",
         state: data.state,
         tags: data.tags || "",
         title: data.title,
-        todoDate:
-          new Date(data.todoDate).toLocaleDateString("fa-IR-u-nu-latn", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }) || "",
+        todoDate: !!data.todoDate
+          ? dateHelper.convertToPersianDate(data.todoDate)
+          : "",
         userId: data.userId,
         estimateHour: data.estimateHour || "",
         remainingHour: data.remainingHour || "",
@@ -79,20 +73,21 @@ export default function useTaskView(taskId: string) {
   async function handleUpdateTask() {
     if (!!task.title.trim()) {
       const editedTask = task;
-      if (task.todoDate) {
+      if (!!task.todoDate) {
         const todoDateGDate = dateHelper.convertJalaliToGregorian(
           Number(task.todoDate.split("/")[0]),
           Number(task.todoDate.split("/")[1]),
           Number(task.todoDate.split("/")[2])
         );
-        console.log(todoDateGDate);
         editedTask.todoDate =
           todoDateGDate[0] + "-" + todoDateGDate[1] + "-" + todoDateGDate[2];
+      } else {
+        editedTask.todoDate = null;
       }
-      console.log(editedTask.todoDate);
       if (task.state === "DONE") {
         editedTask.doneDate = new Date().toLocaleDateString("us");
-        console.log(editedTask.doneDate);
+      } else {
+        editedTask.doneDate = null;
       }
       try {
         await useUpdate(editedTask).unwrap();

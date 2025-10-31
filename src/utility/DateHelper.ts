@@ -186,4 +186,12 @@ export default class DateHelper {
     const leapYearOffsets = [0, 4, 8, 12, 16, 20, 24, 28, 32];
     return leapYearOffsets.includes(remainderFromEpoch);
   }
+
+  convertToPersianDate(date: Date | string) {
+    return new Date(date).toLocaleDateString("fa-IR-u-nu-latn", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  }
 }

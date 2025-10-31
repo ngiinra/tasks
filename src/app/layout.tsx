@@ -19,7 +19,6 @@ export default function RootLayout({
       <body className=" text-sm lg:text-base">
         <StoreProvider>
           <Toaster />
-          <DashboardNavbar />
           {children}
         </StoreProvider>
       </body>

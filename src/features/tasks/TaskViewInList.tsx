@@ -7,9 +7,11 @@ import { showSomeOfText } from "@/utility/TextHelper";
 import SelectInput from "../infrastructure/inputs/SelectInput";
 import Link from "next/link";
 import useDeleteTask from "./useDeleteTask";
+import DateHelper from "@/utility/DateHelper";
 
 function TaskViewInList({ task }: { task: TaskType }) {
   const { title, description, list, tags, id } = task;
+  const dateHelper = new DateHelper();
   const tagsList = tags.split(",");
   const ui = useTheme();
   const {
@@ -83,8 +85,18 @@ function TaskViewInList({ task }: { task: TaskType }) {
               {showSomeOfText(description, 50)}
             </p>
             <div className="flex flex-col lg:flex-row items-center justify-between text-xs px-4 py-2">
-              <p>تاریخ برنامه ریزی شده: {task.todoDate}</p>
-              <p>تاریخ انجام: {task.doneDate}</p>
+              <p>
+                تاریخ برنامه ریزی شده:
+                {!!task.todoDate
+                  ? dateHelper.convertToPersianDate(task.todoDate)
+                  : ""}
+              </p>
+              <p>
+                تاریخ انجام:{" "}
+                {!!task.doneDate
+                  ? dateHelper.convertToPersianDate(task.doneDate)
+                  : ""}
+              </p>
             </div>
 
             <div
