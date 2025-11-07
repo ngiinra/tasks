@@ -34,17 +34,17 @@ export default function useAddTaskForm() {
   const loginUser = useSelector((store: RootState) => store.User);
   const [task, setTask] = useState<TaskType>(initialTask);
   const { data: lists, isLoading: listsLoading } = useGetListQuery(
-    loginUser.userId.trim(),
-    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+    loginUser.userId,
+    { skip: !loginUser.userId || loginUser.userId === "" }
   );
 
   const { data: tags, isLoading: tagsLoading } = useGetTagsQuery(
-    loginUser.userId.trim(),
-    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+    loginUser.userId,
+    { skip: !loginUser.userId || loginUser.userId === "" }
   );
 
   useEffect(() => {
-    setTask((pre) => ({ ...pre, userId: loginUser.userId.trim() }));
+    setTask((pre) => ({ ...pre, userId: loginUser.userId }));
   }, [loginUser]);
 
   async function handleAddTask() {
@@ -80,7 +80,7 @@ export default function useAddTaskForm() {
         await addTaskMutaion(newTask).unwrap();
         toast.success("تسک با موفقیت اضافه شد.");
         dispatch(addTask(newTask));
-        setTask({ ...initialTask, userId: loginUser.userId.trim() });
+        setTask({ ...initialTask, userId: loginUser.userId });
         setClicked(false);
       } catch (err) {
         toast.error("افزودن تسک با خطا مواجه شد.");

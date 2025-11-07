@@ -30,7 +30,7 @@ export async function PATCH(
       .input("theme", sql.NVarChar, theme)
       .input("font", sql.NVarChar, font)
       .input("language", sql.NVarChar, language)
-      .input("id", sql.Int, parseInt(params.id))
+      .input("id", sql.Int, Number(params.id))
       .query(
         "UPDATE users SET theme = @theme, font=@font, language=@language WHERE userId = @id"
       );

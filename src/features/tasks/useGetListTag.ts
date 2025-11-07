@@ -4,14 +4,14 @@ import { UserType } from "@/types/UserTypes";
 
 export default function useGetListTag(loginUser: UserType) {
   const { data: lists, isLoading: listsLoading } = useGetListQuery(
-    loginUser.userId.trim(),
-    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+    loginUser.userId,
+    { skip: !loginUser.userId || loginUser.userId === "" }
   );
 
   const { data: tags, isLoading: tagsLoading } = useGetTagsQuery(
-    loginUser.userId.trim(),
-    { skip: !loginUser.userId || loginUser.userId.trim() === "" }
+    loginUser.userId,
+    { skip: !loginUser.userId || loginUser.userId === "" }
   );
 
-  return {lists, listsLoading, tags, tagsLoading};
+  return { lists, listsLoading, tags, tagsLoading };
 }

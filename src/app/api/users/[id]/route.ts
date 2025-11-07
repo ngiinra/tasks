@@ -10,7 +10,7 @@ export async function GET(
     const sqlConnect = await db();
     const res = await sqlConnect
       .request()
-      .input("id", sql.Int, parseInt(params.id))
+      .input("id", sql.Int, Number(params.id))
       .query("SELECT * FROM users WHERE userId = @id");
 
     if (res.recordset.length === 0) {

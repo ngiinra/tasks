@@ -18,15 +18,15 @@ function DefinitionsPage() {
     data: userLists,
     isLoading: listLoading,
     isError: listError,
-  } = useGetListQuery(loginUser.userId.trim(), {
-    skip: !loginUser.userId || loginUser.userId.trim() === "",
+  } = useGetListQuery(loginUser.userId, {
+    skip: !loginUser.userId,
   });
   const {
     data: userTags,
     isLoading: tagLoading,
     isError: tagError,
-  } = useGetTagsQuery(loginUser.userId.trim(), {
-    skip: !loginUser.userId || loginUser.userId.trim() === "",
+  } = useGetTagsQuery(loginUser.userId, {
+    skip: !loginUser.userId,
   });
   useEffect(() => {
     if (userLists) {

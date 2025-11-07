@@ -31,14 +31,14 @@ export default function useAddDefinition() {
     useState<NewDefinitionType>(initialVal);
   const user = useSelector((store: RootState) => store.User);
   useEffect(() => {
-    setNewDefinition((pre) => ({ ...pre, userId: user.userId.trim() }));
+    setNewDefinition((pre) => ({ ...pre, userId: user.userId }));
   }, [user.userId]);
   // لیست یا دسته بندی
   const [addListMutation, { isLoading: addListLoading }] = useAddListMutation();
   const [addTagMutation, { isLoading: addTagLoading }] = useAddTagMutation();
   const dispatch = useDispatch();
   async function handleAddDefinition() {
-    if (newDefinition.userId.trim() !== "") {
+    if (newDefinition.userId !== "") {
       if (newDefinition.cat === "list") {
         try {
           await addListMutation({

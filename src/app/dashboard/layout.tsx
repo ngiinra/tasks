@@ -9,7 +9,7 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const userId = cookieStore.get("user")?.value?.trim();
+  const userId = cookieStore.get("user")?.value;
 
   if (!userId) {
     redirect("/login");

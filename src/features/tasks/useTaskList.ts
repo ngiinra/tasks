@@ -11,8 +11,8 @@ export default function useTaskList() {
     data: tasks,
     isSuccess,
     isLoading,
-  } = useGetUserTasksQuery(loginUser.userId.trim(), {
-    skip: !loginUser.userId || loginUser.userId.trim() === "",
+  } = useGetUserTasksQuery(loginUser.userId, {
+    skip: !loginUser.userId || loginUser.userId === "",
   });
   useEffect(() => {
     if (tasks) dispatch(setTasks(tasks));

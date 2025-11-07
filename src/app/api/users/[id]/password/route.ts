@@ -20,7 +20,7 @@ export async function PATCH(
     const pool = await db();
     await pool
       .request()
-      .input("id", sql.Int, parseInt(params.id))
+      .input("id", sql.Int, Number(params.id))
       .input("password", sql.NVarChar, newPassword)
       .query("UPDATE users SET password = @password WHERE userId = @id");
 

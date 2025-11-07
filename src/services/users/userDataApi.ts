@@ -48,6 +48,14 @@ export const userApi = baseApi.injectEndpoints({
         },
       ],
     }),
+
+    createUser: builder.mutation({
+      query: (userData) => ({
+        url: `users`,
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
@@ -56,4 +64,5 @@ export const {
   useUpdateUserDataMutation,
   useUpdateUserPassMutation,
   useGetLoginUserMutation,
+  useCreateUserMutation,
 } = userApi;

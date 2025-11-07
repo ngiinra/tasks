@@ -13,7 +13,7 @@ export async function POST(
     const sqlConnect = await db();
     await sqlConnect
       .request()
-      .input("userId", sql.NVarChar, params.id)
+      .input("userId", sql.Int, Number(params.id))
       .input("text", sql.NVarChar, text)
       .input("value", sql.NVarChar, value)
       .input("active", sql.Bit, active)

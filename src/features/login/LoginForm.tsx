@@ -3,38 +3,12 @@ import { useState } from "react";
 import TextInputWithLabel from "../infrastructure/inputs/TextInputWithLabel";
 import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
 import { LoginType } from "@/types/UserTypes";
-import { useGetLoginUserMutation } from "@/services/users/userDataApi";
-import { useDispatch } from "react-redux";
-import { setUser } from "@/slices/UserSlice";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import UserForm from "./UserForm";
+import useLogin from "./useLogin";
 
 function LoginForm() {
-  const router = useRouter();
   const [login, setLogin] = useState<LoginType>({ username: "", password: "" });
-  const [useGetLoginUser, { isLoading }] = useGetLoginUserMutation();
-  const dispatch = useDispatch();
-  async function handleLogin() {
-    if (!!login.password.trim() && !!login.username.trim()) {
-      try {
-        const res = await useGetLoginUser(login).unwrap();
-        dispatch(setUser(res));
-        toast.success("به صفحه کاربری خود خوش آمدید");
-        router.push("/dashboard");
-      } catch (e: any) {
-        if (e.status === "401") {
-          toast.error("کاربری با این اطلاعات وجود ندارد");
-        } else if (e.status === "500") {
-          toast.error("خطایی به وجود آمد لطفا چند دقیقه بعد مجدد امتحان کنید.");
-        } else {
-          toast.error("لاگین انجام نشد");
-        }
-      }
-    } else {
-      toast.error("فیلدها خالی هستند.");
-    }
-  }
+  const { isLoading, handleLogin } = useLogin(login);
 
   return (
     <UserForm title="ورود" width="w-xl">
