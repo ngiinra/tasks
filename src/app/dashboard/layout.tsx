@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   const userId = cookieStore.get("user")?.value;
 
   if (!userId) {
-    redirect("/login");
+    redirect("/user/login");
   }
 
   return (

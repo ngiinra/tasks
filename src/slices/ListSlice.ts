@@ -9,6 +9,12 @@ const ListsSlice = createSlice({
     addList: (state, action: PayloadAction<DefinitionType>) => {
       state.push(action.payload);
     },
+    updateList: (state, action: PayloadAction<DefinitionType>) => {
+      const index = state.findIndex((list) => list.id === action.payload.id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...action.payload };
+      }
+    },
     setLists: (state, action: PayloadAction<DefinitionType[]>) => {
       state = action.payload;
     },
@@ -16,4 +22,4 @@ const ListsSlice = createSlice({
 });
 
 export default ListsSlice.reducer;
-export const { addList, setLists } = ListsSlice.actions;
+export const { addList, setLists, updateList } = ListsSlice.actions;

@@ -1,7 +1,15 @@
 import DefinitionInList from "./DefinitionInList";
 import { DefinitionType } from "@/types/definitionsType";
 
-function DefinitionList({ dataList }: { dataList: DefinitionType[] }) {
+function DefinitionList({
+  dataList,
+  dispatchFunc,
+  mutationFunc,
+}: {
+  dataList: DefinitionType[];
+  dispatchFunc: Function;
+  mutationFunc: Function;
+}) {
   if (dataList && dataList.length === 0)
     return <p className="text-center w-full">هیچ دیتایی تعریف نکرده اید.</p>;
   return (
@@ -9,7 +17,12 @@ function DefinitionList({ dataList }: { dataList: DefinitionType[] }) {
       {dataList &&
         dataList.map((list: DefinitionType) => (
           <div className="w-full md:w-1/2 p-3 min-h-30">
-            <DefinitionInList key={list.id} data={list} />
+            <DefinitionInList
+              key={list.id}
+              data={list}
+              dispatchFunc={dispatchFunc}
+              mutationFunc={mutationFunc}
+            />
           </div>
         ))}
     </div>

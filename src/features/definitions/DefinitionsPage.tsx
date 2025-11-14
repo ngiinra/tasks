@@ -5,11 +5,15 @@ import Devider from "../infrastructure/Devider";
 import AddDefinitions from "./AddDefinition";
 import DefinitionList from "./DefinitionList";
 import { RootState } from "../../../store";
-import { useGetListQuery } from "@/services/list/listApi";
+import {
+  useGetListQuery,
+  useUpdateListMutation,
+} from "@/services/list/listApi";
 import { useEffect } from "react";
-import { setLists } from "@/slices/ListSlice";
+import { setLists, updateList } from "@/slices/ListSlice";
 import BeatLoading from "../loader/BeatLoading";
-import { useGetTagsQuery } from "@/services/tags/tagsApi";
+import { useGetTagsQuery, useUpdateTagMutation } from "@/services/tags/tagsApi";
+import { updateTag } from "@/slices/TagsSlice";
 
 function DefinitionsPage() {
   const dispatch = useDispatch();
@@ -42,10 +46,22 @@ function DefinitionsPage() {
       <AddDefinitions />
       <Devider title="لیست های من" />
       <ManageDefinitionItems isError={listError} isLoading={listLoading} />
-      {userLists && <DefinitionList dataList={userLists} />}
+      {userLists && (
+        <DefinitionList
+          dataList={userLists}
+          dispatchFunc={updateList}
+          mutationFunc={useUpdateListMutation}
+        />
+      )}
       <Devider title="تگ های من" />
       <ManageDefinitionItems isError={tagError} isLoading={tagLoading} />
-      {userTags && <DefinitionList dataList={userTags} />}
+      {userTags && (
+        <DefinitionList
+          dataList={userTags}
+          dispatchFunc={updateTag}
+          mutationFunc={useUpdateTagMutation}
+        />
+      )}
     </div>
   );
 }

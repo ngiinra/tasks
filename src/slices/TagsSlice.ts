@@ -9,6 +9,12 @@ const TagsSlice = createSlice({
     addTag: (state, action: PayloadAction<DefinitionType>) => {
       state.push(action.payload);
     },
+    updateTag: (state, action: PayloadAction<DefinitionType>) => {
+      const index = state.findIndex((tag) => tag.id === action.payload.id);
+      if (index !== -1) {
+        state[index] = { ...state[index], ...action.payload };
+      }
+    },
     setTags: (state, action: PayloadAction<DefinitionType[]>) => {
       state = action.payload;
     },
@@ -16,4 +22,4 @@ const TagsSlice = createSlice({
 });
 
 export default TagsSlice.reducer;
-export const { addTag, setTags } = TagsSlice.actions;
+export const { addTag, setTags, updateTag } = TagsSlice.actions;

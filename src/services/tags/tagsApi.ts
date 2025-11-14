@@ -14,6 +14,17 @@ export const tasksApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Tags"],
     }),
+    updateTag: builder.mutation({
+      query: (tagData) => ({
+        url: `/users/${tagData.userId}/tags/${tagData.id}`,
+        method: "POST",
+        body: tagData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      invalidatesTags: ["Tags"],
+    }),
     getTags: builder.query<DefinitionType[], string>({
       query: (userId) => ({
         url: `/users/${userId}/tags`,
@@ -23,4 +34,5 @@ export const tasksApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddTagMutation, useGetTagsQuery } = tasksApi;
+export const { useAddTagMutation, useGetTagsQuery, useUpdateTagMutation } =
+  tasksApi;
