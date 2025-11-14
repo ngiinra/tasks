@@ -6,14 +6,19 @@ import AddDefinitions from "./AddDefinition";
 import DefinitionList from "./DefinitionList";
 import { RootState } from "../../../store";
 import {
+  useDeleteListMutation,
   useGetListQuery,
   useUpdateListMutation,
 } from "@/services/list/listApi";
 import { useEffect } from "react";
-import { setLists, updateList } from "@/slices/ListSlice";
+import { deleteList, setLists, updateList } from "@/slices/ListSlice";
 import BeatLoading from "../loader/BeatLoading";
-import { useGetTagsQuery, useUpdateTagMutation } from "@/services/tags/tagsApi";
-import { updateTag } from "@/slices/TagsSlice";
+import {
+  useDeleteTagMutation,
+  useGetTagsQuery,
+  useUpdateTagMutation,
+} from "@/services/tags/tagsApi";
+import { deleteTag, updateTag } from "@/slices/TagsSlice";
 
 function DefinitionsPage() {
   const dispatch = useDispatch();
@@ -51,6 +56,8 @@ function DefinitionsPage() {
           dataList={userLists}
           dispatchFunc={updateList}
           mutationFunc={useUpdateListMutation}
+          deleteDispatchFunc={deleteList}
+          deleteMutationFunc={useDeleteListMutation}
         />
       )}
       <Devider title="تگ های من" />
@@ -60,6 +67,8 @@ function DefinitionsPage() {
           dataList={userTags}
           dispatchFunc={updateTag}
           mutationFunc={useUpdateTagMutation}
+          deleteDispatchFunc={deleteTag}
+          deleteMutationFunc={useDeleteTagMutation}
         />
       )}
     </div>

@@ -18,8 +18,11 @@ const TagsSlice = createSlice({
     setTags: (state, action: PayloadAction<DefinitionType[]>) => {
       state = action.payload;
     },
+    deleteTag: (state, action: PayloadAction<string | number>) => {
+      state = state.filter((tag) => tag.id !== action.payload);
+    },
   },
 });
 
 export default TagsSlice.reducer;
-export const { addTag, setTags, updateTag } = TagsSlice.actions;
+export const { addTag, setTags, updateTag, deleteTag } = TagsSlice.actions;

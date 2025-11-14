@@ -31,8 +31,19 @@ export const tasksApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Lists"],
     }),
+    deleteList: builder.mutation({
+      query: (data) => ({
+        url: `/users/${data.userId}/list/${data.id.toString()}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Lists"],
+    }),
   }),
 });
 
-export const { useAddListMutation, useGetListQuery, useUpdateListMutation } =
-  tasksApi;
+export const {
+  useAddListMutation,
+  useGetListQuery,
+  useUpdateListMutation,
+  useDeleteListMutation,
+} = tasksApi;

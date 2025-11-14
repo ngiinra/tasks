@@ -18,8 +18,11 @@ const ListsSlice = createSlice({
     setLists: (state, action: PayloadAction<DefinitionType[]>) => {
       state = action.payload;
     },
+    deleteList: (state, action: PayloadAction<string | number>) => {
+      state = state.filter((list) => list.id !== action.payload);
+    },
   },
 });
 
 export default ListsSlice.reducer;
-export const { addList, setLists, updateList } = ListsSlice.actions;
+export const { addList, setLists, updateList, deleteList } = ListsSlice.actions;

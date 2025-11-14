@@ -30,3 +30,25 @@ export async function POST(
     );
   }
 }
+
+export async function DELETE(
+  request: Request,
+  context: { params: { listId: string } }
+) {
+  const params = await context.params;
+  try {
+    const sqlConnect = await db();
+    await sqlConnect
+      .request()
+      .input("id", sql.Int, Number(params.listId))
+      .query("delete from list where id=@id");
+    return NextResponse.json({ success: true });
+  } catch (e) {
+    console.error("delete error:", JSON.stringify(e, null, 2));
+
+    return NextResponse.json(
+      { error: "delete list has failed." },
+      { status: 500 }
+    );
+  }
+}

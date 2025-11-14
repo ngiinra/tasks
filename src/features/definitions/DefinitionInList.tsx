@@ -3,24 +3,50 @@ import { DefinitionType } from "@/types/definitionsType";
 import React, { useEffect, useState } from "react";
 import TextInput from "../infrastructure/inputs/TextInput";
 import useTheme from "@/hooks/useTheme";
-import { RiLightbulbFlashFill, RiLightbulbLine } from "react-icons/ri";
+import {
+  RiDeleteBin2Line,
+  RiLightbulbFlashFill,
+  RiLightbulbLine,
+} from "react-icons/ri";
 import PrimaryButton from "../infrastructure/buttons/PrimaryButton";
 import Button from "../infrastructure/buttons/Button";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import Toolbar from "../infrastructure/Toolbar";
+import ToolbarConfirmation from "../infrastructure/ToolbarConfirmation";
 
 function DefinitionInList({
   data,
   mutationFunc,
   dispatchFunc,
+  deleteMutationFunc,
+  deleteDispatchFunc,
 }: {
   data: DefinitionType;
   mutationFunc: Function;
   dispatchFunc: Function;
+  deleteMutationFunc: Function;
+  deleteDispatchFunc: Function;
 }) {
   const ui = useTheme();
   const [changedData, setChangedData] = useState<DefinitionType>(data);
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [showDeleteToolbar, setShowDeleteToolbar] = useState<boolean>(false);
+  const [useDelete, { isLoading: isDeleting }] = deleteMutationFunc();
+  const [useUpdate, { isLoading }] = mutationFunc();
+  const dispatch = useDispatch();
+
+  async function deleteHandler() {
+    try {
+      await useDelete(changedData);
+      await dispatch(deleteDispatchFunc(changedData));
+      toast.success("با موفقیت حذف شد.");
+      setShowDeleteToolbar(false);
+    } catch (e: any) {
+      console.log(e);
+      toast.error("حذف به خطا خورد.");
+    }
+  }
   useEffect(() => {
     if (
       data.text.trim() !== changedData.text.trim() ||
@@ -30,9 +56,6 @@ function DefinitionInList({
       setEditMode(true);
     }
   }, [changedData]);
-
-  const [useUpdate, { isLoading }] = mutationFunc();
-  const dispatch = useDispatch();
   function cancel() {
     setChangedData(data);
     setEditMode(false);
@@ -41,16 +64,32 @@ function DefinitionInList({
     if (!!changedData.text.trim() && !!changedData.value.trim()) {
       try {
         await useUpdate(changedData).unwrap();
-        dispatch(dispatchFunc(changedData));
+        await dispatch(dispatchFunc(changedData));
         toast.success("به درستی آپدیت شد");
         setEditMode(false);
       } catch {
-        toast.error(" بروز نشد ");
+        toast.error("بروز نشد ");
       }
     }
   }
+
   return (
-    <div className={`px-4 py-3 rounded-md ${ui.taskBg + " " + ui.taskShadow}`}>
+    <div
+      className={`relative px-4 py-3 rounded-md ${
+        ui.taskBg + " " + ui.taskShadow
+      }`}
+    >
+      {!!changedData.id && (
+        <Toolbar showText={showDeleteToolbar} place="-top-10 -left-8">
+          <ToolbarConfirmation
+            buttons={["بله", "انصراف"]}
+            deleteHandeler={deleteHandler}
+            deleteItemId={changedData.id}
+            setShowToolbar={setShowDeleteToolbar}
+            text="آیا اطمینان دارید؟"
+          />
+        </Toolbar>
+      )}
       <div className="flex w-full items-center justify-center gap-2">
         <TextInput
           value={changedData.text}
@@ -75,6 +114,10 @@ function DefinitionInList({
             onClick={() => setChangedData((pre) => ({ ...pre, active: 1 }))}
           />
         )}
+        <RiDeleteBin2Line
+          className="size-20 text-red-500 cursor-pointer"
+          onClick={() => setShowDeleteToolbar((pre) => !pre)}
+        />
       </div>
       <div
         className={`${
