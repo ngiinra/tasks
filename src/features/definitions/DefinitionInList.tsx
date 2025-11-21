@@ -1,6 +1,6 @@
 "use client";
 import { DefinitionType } from "@/types/definitionsType";
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import TextInput from "../infrastructure/inputs/TextInput";
 import useTheme from "@/hooks/useTheme";
 import {
@@ -30,7 +30,6 @@ function DefinitionInList({
 }) {
   const ui = useTheme();
   const [changedData, setChangedData] = useState<DefinitionType>(data);
-  const [editMode, setEditMode] = useState<boolean>(false);
   const [showDeleteToolbar, setShowDeleteToolbar] = useState<boolean>(false);
   const [useDelete, { isLoading: isDeleting }] = deleteMutationFunc();
   const [useUpdate, { isLoading }] = mutationFunc();
@@ -47,18 +46,15 @@ function DefinitionInList({
       toast.error("حذف به خطا خورد.");
     }
   }
-  useEffect(() => {
-    if (
+  const isEditted = useMemo(() => {
+    return (
       data.text.trim() !== changedData.text.trim() ||
       data.value.trim() !== changedData.value.trim() ||
       data.active !== changedData.active
-    ) {
-      setEditMode(true);
-    }
-  }, [changedData]);
+    );
+  }, [data, changedData]);
   function cancel() {
     setChangedData(data);
-    setEditMode(false);
   }
   async function edit() {
     if (!!changedData.text.trim() && !!changedData.value.trim()) {
@@ -66,7 +62,7 @@ function DefinitionInList({
         await useUpdate(changedData).unwrap();
         await dispatch(dispatchFunc(changedData));
         toast.success("به درستی آپدیت شد");
-        setEditMode(false);
+        setChangedData(data);
       } catch {
         toast.error("بروز نشد ");
       }
@@ -121,7 +117,7 @@ function DefinitionInList({
       </div>
       <div
         className={`${
-          editMode ? "opacity-100 h-20" : "opacity-0 h-0"
+          isEditted ? "opacity-100 h-20" : "opacity-0 h-0"
         } w-full flex flex-col md:flex-row duration-300 transition-all`}
       >
         <PrimaryButton

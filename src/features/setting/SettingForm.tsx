@@ -35,7 +35,6 @@ function SettingForm() {
   });
   useEffect(() => {
     if (defaultSettingData) {
-      console.log(defaultSettingData);
       setSelectedData({
         theme: defaultSettingData.theme.trim(),
         font: defaultSettingData.font.trim(),
